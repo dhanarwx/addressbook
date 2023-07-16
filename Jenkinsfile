@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('compile') {
             steps {
-                echo 'compile the code ${params.APPVERSION}'
+                echo "compile the code ${params.APPVERSION}"
             }
         }
         stage('unittest') {
