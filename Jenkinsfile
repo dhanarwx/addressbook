@@ -1,44 +1,21 @@
 pipeline {
-    agent none
-
-    tools{
-        //jdk 'myjava'
-        maven 'mymaven'
-    }
-
+    agent any
 
     stages {
-        when{
-            expression{
-                BRANCH_NAME == 'dev'
-            }
-        }
-        stage('Compile') {
-            agent any
+        stage('compile') {
             steps {
-                echo "Compile the code"
-                sh 'mvn compile'
+                echo 'compile the code'
             }
         }
-         stage('UnitTest') {
-            agent any
+        stage('unittest') {
             steps {
-                echo 'Run the test cases'
-                sh 'mvn test'
-            }
-            post{
-                always{
-                    junit 'target/surefire-reports/*.xml'
-                }
+                echo 'run the test case'
             }
         }
-        stage('Package') {
-            agent {label 'linux_slave'}
+        stage('package') {
             steps {
-                echo "Package the code"
-                sh 'mvn package'
+                echo 'package the code'
             }
         }
-
     }
 }
