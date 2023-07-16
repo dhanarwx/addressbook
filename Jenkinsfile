@@ -1,31 +1,28 @@
 pipeline {
     agent any
 
-    parameters{
-        string(name:'Env',defaultValue:'Test',description:'Env to dep1')
-        booleanParam(name:'executeTests',defaultValue:true,description:'decide to run tc')
-        choice(name: 'APPVERSION',choices:['1.1','1.2','1.3'])
+    tools{
+        jdk 'myjava'
+        maven 'mymaven'
     }
 
     stages {
         stage('compile') {
             steps {
-                echo "compile the code ${params.APPVERSION}"
+                echo "compile the code "
+                sh 'mvn compile'
             }
         }
         stage('unittest') {
-            when{
-                expression{
-                    params.executeTests == true
-                }
-            }
             steps {
                 echo 'run the test case'
+                sh 'mvn test'
             }
         }
         stage('package') {
             steps {
-                echo "package the code env:${params.Env}"
+                echo "package the code }"
+                sh 'mvn package'
             }
         }
     }
