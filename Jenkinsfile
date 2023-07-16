@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters{
-        string(name:'Env',defaultValue:'Test,des',description:'Env to dep1')
+        string(name:'Env',defaultValue:'Test',description:'Env to dep1')
     }
 
     stages {
