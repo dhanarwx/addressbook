@@ -27,7 +27,7 @@ pipeline {
                 echo "package the code in env:${params.Env}"
             }
         }
-        stage('package') {
+        stage('deploy') {
             input{
                 message "provide approval for prod"
                 ok "deploy to prod"
