@@ -12,6 +12,11 @@ pipeline {
             }
         }
         stage('testing') {
+            when{
+                experssion{
+                    params.executeTests == true
+                }
+            }
             steps {
                 echo 'test the code  '
             }
