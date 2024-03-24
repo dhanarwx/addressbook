@@ -13,7 +13,7 @@ pipeline {
         }
         stage('testing') {
             when{
-                experssion{
+                expression{
                     params.executeTests == true
                 }
             }
