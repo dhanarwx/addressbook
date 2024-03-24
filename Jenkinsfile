@@ -4,6 +4,8 @@ pipeline {
     tools {
         maven 'mymvn'
         jdk 'myjava'
+    }
+        
 
     stages {
         stage('compile') {
