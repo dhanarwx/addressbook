@@ -1,7 +1,8 @@
 pipeline {
     agent any                                  
-    parameters{
+        parameters{
         string(name:'Env',defaultValue:'Test',description:'Env to dep1')
+        }
     stages {
         stage('compile') {                     
             steps {
