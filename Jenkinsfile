@@ -1,23 +1,38 @@
 pipeline {
-    agent any                                  
-        parameters{
-        string(name:'Env',defaultValue:'Test',description:'Env to dep1')
-        }
+    agent any
+    
+    tools {
+        maven 'mymvn'
+    }
+        
+
     stages {
-        stage('compile') {                     
+        stage('compile') {
+            agent any
             steps {
-                echo 'compile the code'
+                echo "compile the code }"
+                sh 'mvn compile'
             }
         }
-        stage('unittest') {
+        stage('testing') {
+            agent any
             steps {
-                echo 'run the test case'
+                echo 'test the code '
+                sh 'mvn test'
+            }
+            post{
+                always{
+                    junit 'target/surefire-reports/*.xml'
+                }
             }
         }
         stage('package') {
+            agent{label 'linux-slave'}
             steps {
-                echo "package the code env:${params.Env}"
+                echo "package the code "
+                sh 'mvn package'
             }
         }
+        
     }
 }
